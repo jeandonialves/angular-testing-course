@@ -1,5 +1,8 @@
 import { Course } from './../model/course.model';
-import { COURSES } from './../../../../testing/mock/db.data';
+import {
+  COURSES,
+  findLessonsForCourse,
+} from './../../../../testing/mock/db.data';
 import { TestBed } from '@angular/core/testing';
 import {
   HttpClientTestingModule,
@@ -98,5 +101,30 @@ describe('CoursesService', () => {
       status: 500,
       statusText: 'Internal Server Error',
     });
+  });
+
+  it('should find a list of lessons', () => {
+    service.findLessons(1).subscribe((lessons) => {
+      expect(lessons).toBeTruthy();
+      expect(lessons.length).toBe(3);
+    });
+
+    const req = httpTestingController.expectOne(
+      (req) => req.url == '/api/lessons'
+    );
+
+    expect(req.request.method).toEqual('GET');
+
+    expect(req.request.params.get('courseId')).toEqual('1');
+
+    expect(req.request.params.get('filter')).toEqual('');
+
+    expect(req.request.params.get('sortOrder')).toEqual('asc');
+
+    expect(req.request.params.get('pageNumber')).toEqual('0');
+
+    expect(req.request.params.get('pageSize')).toEqual('3');
+
+    req.flush(findLessonsForCourse(1).slice(0, 3));
   });
 });
