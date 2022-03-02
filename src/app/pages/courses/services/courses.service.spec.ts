@@ -8,7 +8,7 @@ import {
 
 import { CoursesService } from './courses.service';
 
-fdescribe('CoursesService', () => {
+describe('CoursesService', () => {
   let service: CoursesService;
   let httpTestingController: HttpTestingController;
 
@@ -18,6 +18,10 @@ fdescribe('CoursesService', () => {
     });
     service = TestBed.inject(CoursesService);
     httpTestingController = TestBed.inject(HttpTestingController);
+  });
+
+  afterEach(() => {
+    httpTestingController.verify();
   });
 
   it('should be created', () => {
@@ -36,5 +40,18 @@ fdescribe('CoursesService', () => {
     expect(req.request.method).toEqual('GET');
 
     req.flush(Object.values(COURSES));
+  });
+
+  it('should find a course by id', () => {
+    service.findCourseById(1).subscribe((course: Course) => {
+      expect(course).toBeTruthy();
+      expect(course.id).toBe(1);
+    });
+
+    const req = httpTestingController.expectOne('/api/courses/1');
+
+    expect(req.request.method).toEqual('GET');
+
+    req.flush(COURSES[0]);
   });
 });
