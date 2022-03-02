@@ -54,4 +54,24 @@ describe('CoursesService', () => {
 
     req.flush(COURSES[0]);
   });
+
+  it('should save the course data', () => {
+    const changes: Partial<Course> = {
+      description: 'Testing unit test',
+    };
+
+    service.saveCourse(1, changes).subscribe((course: Course) => {
+      expect(course.id).toBe(1);
+    });
+
+    const req = httpTestingController.expectOne('/api/courses/1');
+
+    expect(req.request.method).toEqual('PUT');
+    expect(req.request.body.description).toEqual(changes.description);
+
+    req.flush({
+      ...COURSES[0],
+      ...changes,
+    });
+  });
 });
