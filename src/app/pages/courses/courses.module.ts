@@ -8,6 +8,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [CoursesComponent],
-  imports: [CommonModule, CoursesRoutingModule, HttpClientModule],
+  imports: [CommonModule, CoursesRoutingModule],
 })
 export class CoursesModule {}
