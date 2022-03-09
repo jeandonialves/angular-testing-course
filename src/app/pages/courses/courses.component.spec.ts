@@ -38,4 +38,22 @@ describe('CoursesComponent', () => {
     expect(cards).toBeTruthy('Could not find cards');
     expect(cards.length).toBe(3, 'Unexpected number of courses');
   });
+
+  it('should display the first course', () => {
+    component.courses = COURSES;
+
+    fixture.detectChanges();
+
+    const course = component.courses[0];
+
+    const card = el.query(By.css('.course-card:first-child')),
+      title = card.query(By.css('.title')),
+      description = card.query(By.css('.description'));
+
+    expect(card).toBeTruthy('Could not find course card');
+
+    expect(title.nativeElement.textContent).toBe(course.title);
+
+    expect(description.nativeElement.textContent).toBe(course.description);
+  });
 });
