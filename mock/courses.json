@@ -16,5 +16,17 @@
     "title": "RxJs In Practice Course",
     "description": "Understand the RxJs Observable pattern, learn the RxJs Operators via practical examples",
     "category": "BEGINNER"
+  },
+  {
+    "id": 4,
+    "title": "Angular Testing Course - ADVANCED",
+    "description": "In-depth guide to Unit Testing and E2E Testing of Angular Applications",
+    "category": "ADVANCED"
+  },
+  {
+    "id": 5,
+    "title": "Angular Core Deep Dive - ADVANCED",
+    "description": "A detailed walk-through of the most important part of Angular - the Core and Common modules",
+    "category": "ADVANCED"
   }
 ]

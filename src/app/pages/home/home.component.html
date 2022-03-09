@@ -1,1 +1,24 @@
-<p>home works!</p>
+<section>
+  <h1>Todos os cursos</h1>
+
+  <ng-container *ngIf="beginnerCourses$ | async as beginnerCourses">
+    <div *ngIf="beginnerCourses.length > 0">
+      <h2>Beginners</h2>
+      <app-card-course
+        *ngFor="let course of beginnerCourses"
+        [course]="course"
+      ></app-card-course>
+    </div>
+  </ng-container>
+
+
+  <ng-container *ngIf="advancedCourses$ | async as advancedCourses">
+    <div *ngIf="advancedCourses.length > 0">
+      <h2>Advanced</h2>
+      <app-card-course
+        *ngFor="let course of advancedCourses"
+        [course]="course"
+      ></app-card-course>
+    </div>
+  </ng-container>
+</section>
